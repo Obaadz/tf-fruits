@@ -1,9 +1,8 @@
-import type { Request, Response } from "express";
-import { ERROR_MESSAGES, RESPONSE_MESSAGES } from "../types/enums";
-import { classifyImage } from "../services/image";
+import { ERROR_MESSAGES, RESPONSE_MESSAGES } from "../types/enums.js";
+import { classifyImage } from "../services/image.js";
 
 export default class ImageController {
-  static async classify(req: Request, res: Response) {
+  static async classify(req, res) {
     try {
       const image = req.file;
 
@@ -14,7 +13,7 @@ export default class ImageController {
       res
         .status(201)
         .send({ isSuccess: true, label, message: RESPONSE_MESSAGES.SUCCESS });
-    } catch (err: any) {
+    } catch (err) {
       res
         .status(201)
         .send({ isSuccess: false, message: err.message || ERROR_MESSAGES.SERVER_ERROR });

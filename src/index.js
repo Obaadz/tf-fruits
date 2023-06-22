@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
 import mongoose from "mongoose";
-import v1Routes from "./routes/v1/index";
-import { ERROR_MESSAGES } from "./types/enums";
+import v1Routes from "./routes/v1/index.js";
+import { ERROR_MESSAGES } from "./types/enums.js";
 
 config();
 

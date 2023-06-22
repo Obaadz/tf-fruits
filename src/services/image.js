@@ -1,7 +1,7 @@
 import * as tf from "@tensorflow/tfjs-node";
-import classes from "../utils/classes";
+import classes from "../utils/classes.js";
 
-export async function classifyImage(imageBuffer: Buffer) {
+export async function classifyImage(imageBuffer) {
   console.log("start classification of image...");
   const model = await loadMobilenet();
 
@@ -15,11 +15,11 @@ export async function classifyImage(imageBuffer: Buffer) {
   const predictions = model.predict(processedImage);
 
   // Display the result
-  const index = await (predictions as any).as1D().argMax().data();
+  const index = await predictions.as1D().argMax().data();
   const label = classes[index];
 
   console.log("classification of image has been end...");
-  return label as string;
+  return label;
 }
 
 async function loadMobilenet() {
@@ -29,13 +29,13 @@ async function loadMobilenet() {
   return mobilenet;
 }
 
-async function loadImage(imageBuffer: Buffer) {
+async function loadImage(imageBuffer) {
   const decodedImage = tf.node.decodeImage(imageBuffer);
   return decodedImage;
 }
 
 // Utility function to preprocess the input image
-function preprocessImage(image: any) {
+function preprocessImage(image) {
   // Perform any required preprocessing steps such as resizing, normalization, etc.
   const resizedImage = tf.image.resizeBilinear(image, [224, 224]);
   const expandedImage = resizedImage.expandDims();

@@ -29,4 +29,4 @@ export default {
   27: "strawberries",
   28: "tomatoes",
   29: "watermelons",
-} as any;
+};
