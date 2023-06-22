@@ -23,7 +23,7 @@ export async function classifyImage(imageBuffer) {
 }
 
 async function loadMobilenet() {
-  const modelURL = "./src/tensorflow/1/model.json";
+  const modelURL = "./tensorflow/1/model.json";
   const mobilenet = await tf.loadLayersModel(tf.io.fileSystem(modelURL));
 
   return mobilenet;
