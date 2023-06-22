@@ -2,12 +2,15 @@ import * as tf from "@tensorflow/tfjs-node";
 import classes from "../utils/classes";
 
 export async function classifyImage(imageBuffer: Buffer) {
+  console.log("start classification of image...");
   const model = await loadMobilenet();
 
+  console.log("preprocessing start...");
   // Preprocess input image
   const image = await loadImage(imageBuffer);
   const processedImage = preprocessImage(image);
 
+  console.log("run the model on image...");
   // Run inference on the model
   const predictions = model.predict(processedImage);
 
@@ -15,6 +18,7 @@ export async function classifyImage(imageBuffer: Buffer) {
   const index = await (predictions as any).as1D().argMax().data();
   const label = classes[index];
 
+  console.log("classification of image has been end...");
   return label as string;
 }
 
